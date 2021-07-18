@@ -150,7 +150,7 @@ class _HomepageState extends State<Homepage> {
                           size: 30,
                         ),
                         SizedBox(
-                          width: 40,
+                          width: MediaQuery.of(context).size.width*0.08,
                         ),
                         Text("Temperature"),
                         SizedBox(
@@ -169,7 +169,7 @@ class _HomepageState extends State<Homepage> {
                       children: [
                         Text("Weather"),
                         SizedBox(
-                          width: 40,
+                          width: MediaQuery.of(context).size.width*0.08,
                         ),
                         Text(
                           weather != null ? weather.toString() : "Loading",
@@ -184,7 +184,7 @@ class _HomepageState extends State<Homepage> {
                       children: [
                         Text("Humidity"),
                         SizedBox(
-                          width: 40,
+                          width: MediaQuery.of(context).size.width*0.08,
                         ),
                         Text(
                           humidity != null ? humidity.toString() : "Loading",
@@ -199,7 +199,7 @@ class _HomepageState extends State<Homepage> {
                       children: [
                         Text("Wind speed"),
                         SizedBox(
-                          width: 40,
+                          width: MediaQuery.of(context).size.width*0.05,
                         ),
                         Text(
                           wind != null ? wind.toString() + '\u00B0' : "Loading",
