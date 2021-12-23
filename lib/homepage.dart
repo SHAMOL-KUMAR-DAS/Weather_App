@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:flutter/cupertino.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -51,31 +50,32 @@ class _HomepageState extends State<Homepage> {
     switch (weather) {
       case "rain":
         {
-          return AssetImage('assets/images/rain.jpg');
-        }
-      case "overcast clouds":
-        {
-          return AssetImage('assets/images/cloud.jpg');
+          return AssetImage('Assets/images/sunny.jpg');
         }
         break;
-      case "broken clouds":
+      case "overcast clouds":
         {
-          return AssetImage('assets/images/cloud.jpg');
+          return AssetImage('Assets/images/sunny.jpg');
+        }
+        break;
+      case "clouds":
+        {
+          return AssetImage('Assets/images/sunny.jpg');
         }
         break;
       case "clear sky":
         {
-          return AssetImage('assets/images/clear.jpg');
+          return AssetImage('Assets/images/sunny.jpg');
         }
         break;
       case "haze":
         {
-          return AssetImage('assets/images/sunny.jpg');
+          return AssetImage('Assets/images/sunny.jpg');
         }
         break;
       default:
         {
-          return AssetImage('assets/images/clear.jpg');
+          return AssetImage('Assets/images/sunny.jpg');
         }
         break;
     }
@@ -94,7 +94,6 @@ class _HomepageState extends State<Homepage> {
       this.weather = result['weather'][0]['description'];
       this.humidity = result['main']['humidity'];
       this.wind = result['wind']['speed'];
-      //this.icon = result ['weather'] [0] ['icon'];
     });
   }
 
@@ -104,7 +103,7 @@ class _HomepageState extends State<Homepage> {
     super.initState();
     getWeatherData();
   }
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -112,14 +111,13 @@ class _HomepageState extends State<Homepage> {
             title: Center(child: Text("Weather Report of Several Cities"))),
         body: SingleChildScrollView(
           scrollDirection: Axis.horizontal,
+          //scrollDirection: Axis.vertical,
           child: new Stack(
             children: <Widget>[
               new Container(
-                decoration: new BoxDecoration(
+                decoration: BoxDecoration(
                   image: new DecorationImage(
-                    image: backgroundImage(),
-                    fit: BoxFit.cover,
-                  ),
+                      image: backgroundImage(), fit: BoxFit.cover),
                 ),
               ),
               new Center(
@@ -130,7 +128,7 @@ class _HomepageState extends State<Homepage> {
                       size: 80,
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height*0.06,
+                      height: MediaQuery.of(context).size.height * 0.06,
                     ),
                     Text("Currently weather of " + city + " is"),
                     Text(
@@ -140,7 +138,7 @@ class _HomepageState extends State<Homepage> {
                       weather != null ? weather.toString() : "Loading",
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height*0.04,
+                      height: MediaQuery.of(context).size.height * 0.04,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -150,11 +148,11 @@ class _HomepageState extends State<Homepage> {
                           size: 30,
                         ),
                         SizedBox(
-                          width: MediaQuery.of(context).size.width*0.08,
+                          width: MediaQuery.of(context).size.width * 0.08,
                         ),
                         Text("Temperature"),
                         SizedBox(
-                          width: MediaQuery.of(context).size.width*0.1,
+                          width: MediaQuery.of(context).size.width * 0.1,
                         ),
                         Text(
                           temp != null ? temp.toString() + '\u00B0' : "Loading",
@@ -162,14 +160,14 @@ class _HomepageState extends State<Homepage> {
                       ],
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height*0.015,
+                      height: MediaQuery.of(context).size.height * 0.015,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text("Weather"),
                         SizedBox(
-                          width: MediaQuery.of(context).size.width*0.08,
+                          width: MediaQuery.of(context).size.width * 0.08,
                         ),
                         Text(
                           weather != null ? weather.toString() : "Loading",
@@ -177,14 +175,14 @@ class _HomepageState extends State<Homepage> {
                       ],
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height*0.015,
+                      height: MediaQuery.of(context).size.height * 0.015,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text("Humidity"),
                         SizedBox(
-                          width: MediaQuery.of(context).size.width*0.08,
+                          width: MediaQuery.of(context).size.width * 0.08,
                         ),
                         Text(
                           humidity != null ? humidity.toString() : "Loading",
@@ -192,14 +190,14 @@ class _HomepageState extends State<Homepage> {
                       ],
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height*0.015,
+                      height: MediaQuery.of(context).size.height * 0.015,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text("Wind speed"),
                         SizedBox(
-                          width: MediaQuery.of(context).size.width*0.05,
+                          width: MediaQuery.of(context).size.width * 0.05,
                         ),
                         Text(
                           wind != null ? wind.toString() + '\u00B0' : "Loading",
@@ -207,7 +205,7 @@ class _HomepageState extends State<Homepage> {
                       ],
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height*0.05,
+                      height: MediaQuery.of(context).size.height * 0.05,
                     ),
                     Center(
                         child: Text(
@@ -239,9 +237,9 @@ class _HomepageState extends State<Homepage> {
                         FlatButton(
                             onPressed: () {
                               setState(() {
-                                backgroundImage();
                                 city = "khulna";
                                 getWeatherData();
+                                backgroundImage();
                               });
                             },
                             color: Colors.green,
@@ -256,8 +254,8 @@ class _HomepageState extends State<Homepage> {
                             onPressed: () {
                               setState(() {
                                 city = "Chittagong";
-                                backgroundImage();
                                 getWeatherData();
+                                backgroundImage();
                               });
                             },
                             color: Colors.green,
@@ -301,7 +299,7 @@ class _HomepageState extends State<Homepage> {
                               style: TextStyle(fontWeight: FontWeight.bold),
                             )),
                         SizedBox(
-                          width: MediaQuery.of(context).size.width*0.01,
+                          width: MediaQuery.of(context).size.width * 0.01,
                         ),
                         FlatButton(
                             color: Colors.green,
@@ -317,7 +315,7 @@ class _HomepageState extends State<Homepage> {
                               style: TextStyle(fontWeight: FontWeight.bold),
                             )),
                         SizedBox(
-                          width: MediaQuery.of(context).size.width*0.01,
+                          width: MediaQuery.of(context).size.width * 0.01,
                         ),
                         FlatButton(
                             onPressed: () {
@@ -331,7 +329,7 @@ class _HomepageState extends State<Homepage> {
                               style: TextStyle(fontWeight: FontWeight.bold),
                             )),
                         SizedBox(
-                          width: MediaQuery.of(context).size.width*0.01,
+                          width: MediaQuery.of(context).size.width * 0.01,
                         ),
                         FlatButton(
                             onPressed: () {
